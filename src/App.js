@@ -1,69 +1,148 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
-  I18nManager,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
+  Image,
+  Text,
   View,
+  Button,
+  TouchableOpacity,
 } from 'react-native';
-import {CommonActions, NavigationContainer} from '@react-navigation/native';
-import {Provider} from 'react-redux';
-import RouterNavigator from './RouterNavigator';
-import {navigationRef, isReadyRef, reset} from './NavigationActions';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {changeLng} from './Config';
-import {Spinner, VectorIcon} from './components/assets/UIComponents';
-import Store from './store';
-
-function AppContainer(props) {
-  return (
-    <Provider store={Store}>
-        <NavigationContainer
-          ref={navigationRef}
-          onReady={() => {
-            isReadyRef.current = true;
-          }}>
-          <KeyboardAvoidingView
-            style={{flex: 1}}
-            behavior={Platform.OS === 'ios' ? 'padding' : null}>
-            <RouterNavigator  />
-          </KeyboardAvoidingView>
-        </NavigationContainer>
-    </Provider>
-  );
-}
+import { firstPageStyles } from "./components/assets/styles/Styles";
+import Icon from 'react-native-vector-icons/AntDesign';
 class App extends Component {
-  state = {lng: false, lang: '', loading: false};
-  async componentDidMount() {
-    let lang = await AsyncStorage.getItem('language');
-    if (lang) {
-      this.setState({lng: true, lang: lang});
-      changeLng(lang);
-    } else {
-      this.setState({lng: true});
-    }
-    Store.subscribe(() => {
-      const storeState = Store.getState();
-      if (storeState.mainR.loading) {
-        this.setState({loading: true});
-      } else {
-        this.setState({loading: false});
-      }
-    });
-  }
-  render() {
-    const {lng, lang, loading} = this.state;
-    if (lng) {
-      return (
-        <View style={{flex: 1}}>
-          <AppContainer lang={lang} />
-          {loading ? <Spinner /> : null}
-        </View>
-      );
-    } else {
-      return <View />;
-    }
-  }
-}
 
+  render() {
+    return (
+      <View style={firstPageStyles.firstView}>
+        <View style={{ flex: 6 }}>
+          <TouchableOpacity>
+            <View style={firstPageStyles.itemView}>
+              <Image source={require('./components/assets/images/iconTwo.png')} />
+              <Text style={firstPageStyles.seventhText}>قائمة المهام</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={firstPageStyles.sameContainerTwo}>
+            <View style={firstPageStyles.sameContainerTwoFirstView}>
+              <Text style={firstPageStyles.sameContainerTwoFirstViewText}>
+                القائمة الأولي
+              </Text>
+            </View>
+            <View style={firstPageStyles.firstSpacer}></View>
+            <View style={firstPageStyles.sameContainerTwoSecondView}>
+              <View style={firstPageStyles.englishTextViewOne}>
+                <Text style={firstPageStyles.sameContainerTwoSecondViewText}>
+                  Pylon Cover                </Text>
+              </View>
+              <View style={firstPageStyles.spacerView}></View>
+              <View style={firstPageStyles.sameContainerTwoInnerView}>
+                <Icon name="check" color={"white"} size={20} />
+              </View>
+            </View>
+            <View style={firstPageStyles.sameContainerTwoSecondView}>
+              <View style={firstPageStyles.englishTextView}>
+                <Text style={firstPageStyles.sameContainerTwoSecondViewText}>
+
+                  Side Frame
+
+                </Text>
+              </View>
+              <View style={firstPageStyles.spacerView}></View>
+              <View style={firstPageStyles.sameContainerTwoInnerViewTwo}>
+              </View>
+            </View>
+            <View style={firstPageStyles.sameContainerTwoSecondView}>
+              <View style={firstPageStyles.englishThirdTextView}>
+                <Text style={firstPageStyles.sameContainerTwoThirdViewText}>
+
+
+                  Stickers
+
+                </Text>
+              </View>
+              <View style={firstPageStyles.spacerView}></View>
+              <View style={firstPageStyles.sameContainerTwoInnerViewTwo}>
+              </View>
+            </View>
+            <View style={firstPageStyles.sameContainerTwoSecondView}>
+              <View style={firstPageStyles.englishTextViewTwo}>
+                <Text style={firstPageStyles.sameContainerTwoSecondViewText}>
+
+
+                  ATM  Code
+                </Text>
+              </View>
+              <View style={firstPageStyles.spacerView}></View>
+              <View style={firstPageStyles.sameContainerTwoInnerViewTwo}>
+              </View>
+            </View>
+          </View>
+
+          <View style={firstPageStyles.sameContainerTwo}>
+            <View style={firstPageStyles.sameContainerTwoFirstView}>
+              <Text style={firstPageStyles.sameContainerTwoFirstViewText}>
+                القائمة الثانية              </Text>
+            </View>
+            <View style={firstPageStyles.firstSpacer}></View>
+            <View style={firstPageStyles.sameContainerTwoSecondView}>
+              <View style={firstPageStyles.englishTextViewOne}>
+                <Text style={firstPageStyles.sameContainerTwoSecondViewText}>
+                  Pylon Cover                </Text>
+              </View>
+              <View style={firstPageStyles.spacerView}></View>
+              <View style={firstPageStyles.sameContainerTwoInnerView}>
+                <Icon name="check" color={"white"} size={20} />
+              </View>
+            </View>
+            <View style={firstPageStyles.sameContainerTwoSecondView}>
+              <View style={firstPageStyles.englishTextView}>
+                <Text style={firstPageStyles.sameContainerTwoSecondViewText}>
+
+                  Side Frame
+
+                </Text>
+              </View>
+              <View style={firstPageStyles.spacerView}></View>
+              <View style={firstPageStyles.sameContainerTwoInnerViewTwo}>
+              </View>
+            </View>
+            <View style={firstPageStyles.sameContainerTwoSecondView}>
+              <View style={firstPageStyles.englishThirdTextView}>
+                <Text style={firstPageStyles.sameContainerTwoThirdViewText}>
+
+
+                  Stickers
+
+                </Text>
+              </View>
+              <View style={firstPageStyles.spacerView}></View>
+              <View style={firstPageStyles.sameContainerTwoInnerViewTwo}>
+              </View>
+            </View>
+            <View style={firstPageStyles.sameContainerTwoSecondView}>
+              <View style={firstPageStyles.englishTextViewTwo}>
+                <Text style={firstPageStyles.sameContainerTwoSecondViewText}>
+
+
+                  ATM  Code
+                </Text>
+              </View>
+              <View style={firstPageStyles.spacerView}></View>
+              <View style={firstPageStyles.sameContainerTwoInnerViewTwo}>
+              </View>
+            </View>
+          </View>
+
+
+        </View>
+        <TouchableOpacity style={{ flex: 1 }}>
+          <View style={firstPageStyles.thirdView}>
+            <Text style={firstPageStyles.fifthText}>تاكيد</Text>
+          </View>
+        </TouchableOpacity>
+
+      </View>
+
+    );
+  }
+
+}
 export default App;
